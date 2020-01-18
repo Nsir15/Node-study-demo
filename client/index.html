@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="getUser()">获取用户信息</button>
+  <button onclick="register()">注册</button>
+</body>
+<script src="./axios.min.js"></script>
+<script src="./md5.min.js"></script>
+<script>
+  function axiosInit(){
+
+    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.interceptors.response.use(res=>res.data);
+
+    // 这个主要是用来出来post请求
+    // AXIOS默认基于请求主体传递给服务器的是RAW格式的:'{"name":"xxx"...}'，就是json字符串格式。
+    // 真实项目中我们有的服务器约定的传输格式应该是X-WWW-URL-ENCODEED:"name=xxx&age=xxx&sex=xxx"
+    // 如果服务器支持 RAW格式或者就是需要那个格式，就不要这个处理
+    axios.defaults.transformRequest = data => {
+      // 把POST和PUT等传递给服务器的请求主体内容进行格式化处理，DATA就是配置的请求主体对象
+
+    }
+  };
+
+  function getUser(){
+    console.log('getUser')
+  };
+
+  function register(){
+    console.log('register')
+  };
+
+  function __main(){
+    axiosInit();
+  };
+
+  __main();
+  
+</script>
+</html>
