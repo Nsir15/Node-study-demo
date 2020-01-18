@@ -10,12 +10,13 @@
   <button onclick="getUser()">获取用户信息</button>
   <button onclick="register()">注册</button>
 </body>
-<script src="./axios.min.js"></script>
-<script src="./md5.min.js"></script>
+<script src="../axios.min.js"></script>
+<script src="../md5.min.js"></script>
 <script>
   function axiosInit(){
 
-    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.defaults.baseURL = 'http://127.0.0.1:8081';
+    // axios.defaults.withCredentials = true;  // 允许跨域请求
     axios.interceptors.response.use(res=>res.data);
 
     // 这个主要是用来出来post请求
@@ -24,16 +25,33 @@
     // 如果服务器支持 RAW格式或者就是需要那个格式，就不要这个处理
     axios.defaults.transformRequest = data => {
       // 把POST和PUT等传递给服务器的请求主体内容进行格式化处理，DATA就是配置的请求主体对象
-
+      let str = ''
+      if(data && typeof data === 'object'){
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const element = data[key];
+            str +=`${key}=${element}&`
+          }
+        }
+        data = str.slice(0,-1)
+      }
+      return data;
     }
   };
 
   function getUser(){
-    console.log('getUser')
+    console.log(axios)
   };
 
   function register(){
-    console.log('register')
+    axios.post('/register',{
+        name:'wangwu麻子',
+        sex:1,
+        password:hex_md5('123456') // 需要进行MD5加密 ,不可逆加密
+      }
+    ).then(res=>{
+
+    }).catch(err=>{})
   };
 
   function __main(){
@@ -41,6 +59,6 @@
   };
 
   __main();
-  
+
 </script>
 </html>

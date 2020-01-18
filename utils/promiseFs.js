@@ -44,6 +44,9 @@ let suffixHandle = function(pathname){
 ['writeFile','appendFile'].forEach(item=>{
   fsObject['_'+item] = function anonymous(pathname,data){
     pathname = path.resolve(pathname);
+    if(typeof data !== 'string'){
+      data = JSON.stringify(data)  // 我们规定写入内容必须是字符串格式
+    }
     return new Promise((resolve,reject)=>{
       let callback = (err,res)=>{
         if(err){

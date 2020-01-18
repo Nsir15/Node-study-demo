@@ -1,3 +1,1 @@
-var a = 111
-var test = "test"
-var b = 333
+[{"name":"wang","age":18},{"name":"wang","age":18},{"name":"wang","age":18}]
