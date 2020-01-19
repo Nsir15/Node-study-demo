@@ -19,7 +19,7 @@
     // axios.defaults.withCredentials = true;  // 允许跨域请求
     axios.interceptors.response.use(res=>res.data);
 
-    // 这个主要是用来出来post请求
+    // 这个主要是用来处理post请求
     // AXIOS默认基于请求主体传递给服务器的是RAW格式的:'{"name":"xxx"...}'，就是json字符串格式。
     // 真实项目中我们有的服务器约定的传输格式应该是X-WWW-URL-ENCODEED:"name=xxx&age=xxx&sex=xxx"
     // 如果服务器支持 RAW格式或者就是需要那个格式，就不要这个处理
